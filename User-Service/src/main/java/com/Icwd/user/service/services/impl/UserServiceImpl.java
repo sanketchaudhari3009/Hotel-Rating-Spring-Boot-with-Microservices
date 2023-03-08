@@ -1,8 +1,8 @@
 package com.Icwd.user.service.services.impl;
 
-import com.Icwd.user.service.entities.User;
 import com.Icwd.user.service.exceptions.ResourceNotFoundException;
 import com.Icwd.user.service.repositories.UserRepository;
+import com.Icwd.user.service.entities.User;
 import com.Icwd.user.service.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

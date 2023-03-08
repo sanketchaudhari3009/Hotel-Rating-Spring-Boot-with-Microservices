@@ -1,7 +1,7 @@
 package com.Icwd.user.service.controller;
 
-import com.Icwd.user.service.entities.User;
 import com.Icwd.user.service.services.UserService;
+import com.Icwd.user.service.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
