@@ -3,6 +3,7 @@ package com.Icwd.user.service.services.impl;
 import com.Icwd.user.service.entities.Hotel;
 import com.Icwd.user.service.entities.Rating;
 import com.Icwd.user.service.exceptions.ResourceNotFoundException;
+import com.Icwd.user.service.external.services.HotelService;
 import com.Icwd.user.service.repositories.UserRepository;
 import com.Icwd.user.service.entities.User;
 import com.Icwd.user.service.services.UserService;
@@ -28,6 +29,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private HotelService hotelService;
+
     private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
@@ -49,7 +53,7 @@ public class UserServiceImpl implements UserService {
         //get user from db with the help of user repo
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException(("User with given id is not found on the server!! : " + userId)));
         //fetch rating of the above user from RATING SERVICE
-        Rating[] ratingsOfUser = restTemplate.getForObject("http://localhost:8083/ratings/users/"+user.getUserId(), Rating[].class);
+        Rating[] ratingsOfUser = restTemplate.getForObject("http://RATING-SERVICE/ratings/users/"+user.getUserId(), Rating[].class);
         logger.info("{}",ratingsOfUser);
 
         List<Rating> ratings = Arrays.stream(ratingsOfUser).toList();
@@ -57,9 +61,9 @@ public class UserServiceImpl implements UserService {
         List<Rating> ratingList = ratings.stream().map(rating -> {
             //api call to hotel service
             //http://localhost:8082/hotels/b6f6e6fa-40b6-4439-a4fa-422cf69ecc44
-            ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://localhost:8082/hotels/"+rating.getHotelId(), Hotel.class);
-            Hotel hotel = forEntity.getBody();
-            logger.info("response status code: {}",forEntity.getStatusCode());
+            //ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://HOTEL-SERVICE/hotels/"+rating.getHotelId(), Hotel.class);
+            Hotel hotel = hotelService.getHotel(rating.getHotelId());
+            //logger.info("response status code: {}",forEntity.getStatusCode());
 
             //set hotel to rating
             rating.setHotel(hotel);

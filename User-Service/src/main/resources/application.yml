@@ -16,7 +16,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
   application:
-    name: USER_SERVICE
+    name: USER-SERVICE
 
 
 eureka:
