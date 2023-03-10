@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private HotelService hotelService;
 
-    private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
     public User saveUser(User user) {
