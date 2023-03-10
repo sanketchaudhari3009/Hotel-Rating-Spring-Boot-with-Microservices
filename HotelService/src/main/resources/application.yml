@@ -12,5 +12,7 @@ spring:
       ddl-auto: update
     show-sql: true
   application:
-    name: HOTEL_SERVICE
+    name: HOTEL-SERVICE
+  config:
+    import: configserver:http://localhost:8085
 
