@@ -4,7 +4,7 @@ spring:
       uri: mongodb://localhost:27017
       database: microservices
   application:
-    name: RATING_SERVICE
+    name: RATING-SERVICE
 
 server:
   port: 8083
@@ -17,3 +17,9 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+
+okta:
+  oauth2:
+    issuer: https://dev-39909742.okta.com/oauth2/default
+    audience: api://default
